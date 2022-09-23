@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--inherit form-->
+     <record id="product_form_inherited" model="ir.ui.view">
+        <field name="name">product.form.inherited</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath  expr="//form/sheet/notebook/page" position="after">
+                <page string="Brand">
+                    <field name="rel_product_brand_ids">
+                        <tree editable="top">
+                            <field name="product_brand_id"/>
+                            <field name="brand_note"/>
+                            <field name="brand_type"/>
+                            <field name="isGood"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+<!--action-->
+   <record id="action_product_multi_brand" model="ir.actions.act_window">
+            <field name="name">Brands</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.brand</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">There are no object</field>
+    </record>
+
+<!--menu item-->
+    <menuitem id="menu_brand"
+              name="Brand" parent="stock.menu_product_in_config_stock"
+              sequence="4"
+              action="action_product_multi_brand"
+    />
+</odoo>

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "",
+    'name': "Product Multi Brand",
     
-    'summary': "",
+    'summary': "extension for invenory app",
   
     'license': 'OPL-1',
 
@@ -15,10 +15,13 @@
     'website': "http://www.stesi.eu",
 
     # any module necessary for this one to work correctly
-    'depends': [],
+    'depends': ['stock','product_brand','product'],
     
     # always loaded
-    'data': [],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/brand_menu.xml'
+    ],
 
     'application': False,
 }
