@@ -1,25 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--inherit form-->
+
+
+
+
+    <!--inherit form , tab Brand-->
      <record id="product_form_inherited" model="ir.ui.view">
         <field name="name">product.form.inherited</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath  expr="//form/sheet/notebook/page" position="after">
-                <page string="Brand">
-                    <field name="rel_product_brand_ids">
-                        <tree editable="top">
-                            <field name="product_brand_id"/>
-                            <field name="brand_note"/>
-                            <field name="brand_type"/>
-                            <field name="isGood"/>
+                <page string="Description Brand">
+
+                    <field name="attribute_line_brand_ids" widget="one2many">
+                        <tree string="Variants" editable="bottom">
+                            <field name="attribute_id" attrs="{'readonly': [('id', '!=', False)]} " domain="[('is_Brand', '=', True)]"/>
+                            <field name="value_ids" widget="many2many_tags" options="{'no_create_edit': True}" context="{'default_attribute_id': attribute_id, 'show_attribute': False}"/>
+                            <field name="description" />
+                            <field name="code"/>
+                            <field name="type"/>
                         </tree>
                     </field>
+
+
                 </page>
+            </xpath>
+            <!--<xpath expr="//"-->
+
+        </field>
+    </record>
+
+    <!--inherit form product attribute -->
+    <record id="product_attribute_form_inherited2" model="ir.ui.view">
+        <field name="name">product.attribute.form.inherited2</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <group name="main_fields" position="inside">
+                <field name="is_Brand"/>
+            </group>
+        </field>
+    </record>
+<!--add is_Brand model product attribute-->
+    <record id="product_attribute_form_inherited" model="ir.ui.view">
+        <field name="name">product.attribute.form.inherited</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <xpath  expr="//form/sheet/notebook/page/field/tree" position="inside">
+                <field name="is_Brand"/>
             </xpath>
         </field>
     </record>
+
+    <!--inherit form counter brands-->
+    <record id="product_form_brand_count_inherited" model="ir.ui.view">
+        <field name="name">product.form.brand.count.inherited</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath  expr="//form/sheet/notebook/page" position="inside">
+                <field name="brand_count"/>
+            </xpath>
+        </field>
+    </record>
+    <!--inherit form-->
+
 
 <!--action-->
    <record id="action_product_multi_brand" model="ir.actions.act_window">

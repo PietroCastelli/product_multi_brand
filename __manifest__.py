@@ -14,10 +14,10 @@
   
     'website': "http://www.stesi.eu",
 
-    # any module necessary for this one to work correctly
+
     'depends': ['stock','product_brand','product'],
     
-    # always loaded
+
     'data': [
         'security/ir.model.access.csv',
         'views/brand_menu.xml'
