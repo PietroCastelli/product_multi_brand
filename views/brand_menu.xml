@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-
-
-
     <!--inherit form , tab Brand-->
      <record id="product_form_inherited" model="ir.ui.view">
         <field name="name">product.form.inherited</field>
@@ -15,18 +11,39 @@
 
                     <field name="attribute_line_brand_ids" widget="one2many">
                         <tree string="Variants" editable="bottom">
-                            <field name="attribute_id" attrs="{'readonly': [('id', '!=', False)]} " domain="[('is_Brand', '=', True)]"/>
+                            <field name="attribute_id" attrs="{'readonly': [('id', '!=', False)]} " domain="[('is_Brand', '=', True)]" />
                             <field name="value_ids" widget="many2many_tags" options="{'no_create_edit': True}" context="{'default_attribute_id': attribute_id, 'show_attribute': False}"/>
                             <field name="description" />
                             <field name="code"/>
                             <field name="type"/>
+
                         </tree>
                     </field>
-
-
                 </page>
             </xpath>
-            <!--<xpath expr="//"-->
+            <!--inherit page variants add domain -->
+            <xpath expr="//form/sheet/notebook/page[@name='variants']/field[@name='attribute_line_ids']" position="attributes">
+                <attribute name="name">attribute_line_variant_ids</attribute>
+            </xpath>
+            <!--add domain -->
+            <xpath expr="//form/sheet/notebook/page[@name='variants']/field[@name='attribute_line_variant_ids']//tree//field[@name='attribute_id']" position="attributes">
+              <attribute name="domain">[('is_Brand', '=', False)]</attribute>
+            </xpath>
+<!--add boolean-->
+             <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']" position="before">
+                <group>
+                    <field name="brand_in_description_sale"/>
+                </group>
+             </xpath>
+<!--replace filed header-->
+            <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']/field[@name='description_sale']" position="replace">
+                <field name="description_sale_header" nolabel="1"  attrs="{'invisible': [('brand_in_description_sale','=',True)]}"/>
+            </xpath>
+<!--add description sale variant  -->
+            <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']/field[@name='description_sale_header']" position="after">
+                <field name="description_sale_variant" nolabel="1" attrs="{'invisible': [('brand_in_description_sale','=',False)]}"/>
+            </xpath>
+
 
         </field>
     </record>
@@ -65,7 +82,6 @@
             </xpath>
         </field>
     </record>
-    <!--inherit form-->
 
 
 <!--action-->
