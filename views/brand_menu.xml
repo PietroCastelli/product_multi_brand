@@ -16,7 +16,6 @@
                             <field name="description" />
                             <field name="code"/>
                             <field name="type"/>
-
                         </tree>
                     </field>
                 </page>
@@ -35,13 +34,16 @@
                     <field name="brand_in_description_sale"/>
                 </group>
              </xpath>
-<!--replace filed header-->
-            <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']/field[@name='description_sale']" position="replace">
-                <field name="description_sale_header" nolabel="1"  attrs="{'invisible': [('brand_in_description_sale','=',True)]}"/>
+<!--scompare quando metti true description sales-->
+            <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']" position="attributes">
+                <attribute name="attrs">{'invisible': [('brand_in_description_sale','=',True)]}</attribute>
             </xpath>
 <!--add description sale variant  -->
-            <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']/field[@name='description_sale_header']" position="after">
-                <field name="description_sale_variant" nolabel="1" attrs="{'invisible': [('brand_in_description_sale','=',False)]}"/>
+            <xpath expr="//form/sheet/notebook/page[@name='sales']/group[@name='description']" position="before">
+                <group string="Sales Description" name="description_header" attrs="{'invisible': [('brand_in_description_sale','=',False)]}">
+                    <field name="description_sale_header" nolabel="1" placeholder="This note is added to sales orders and invoices."/>
+                </group>
+
             </xpath>
 
 
