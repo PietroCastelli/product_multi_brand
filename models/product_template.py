@@ -13,11 +13,13 @@ class ProductTemplate(models.Model):
                                                  'Product Attributes',
                                                  copy=True,
                                                  domain=[('is_Brand', '=', False)])
-    brand_in_description_sale = fields.Boolean(default=False, string="Use Vendor Brand in Description Sale")
+    brand_in_description_sale = fields.Boolean(default=True, string="Use Vendor Brand in Description Sale")
+
 
     description_sale = fields.Text(compute="_compute_description_sale",
-                                           inverse="_inverse_description_sale",
-                                           store=True)
+                                   inverse="_inverse_description_sale",
+                                   store=True)
+
 
     description_sale_header = fields.Text(
         'Sales Description', translate=True,
@@ -34,7 +36,7 @@ class ProductTemplate(models.Model):
             else:
                 product.description_sale_header = product.description_sale_header
 
-    @api.depends('description_sale_header', 'attribute_line_brand_ids', 'brand_in_description_sale')
+    @api.depends('description_sale_header', 'attribute_line_brand_ids', 'brand_in_description_sale', 'description_sale')
     def _compute_description_sale(self):
         for product in self:
             product.description_sale = ""
