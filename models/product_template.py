@@ -15,19 +15,14 @@ class ProductTemplate(models.Model):
                                                  domain=[('is_Brand', '=', False)])
     brand_in_description_sale = fields.Boolean(default=True, string="Use Vendor Brand in Description Sale")
 
-
     description_sale = fields.Text(compute="_compute_description_sale",
                                    inverse="_inverse_description_sale",
                                    store=True)
-
 
     description_sale_header = fields.Text(
         'Sales Description', translate=True,
         help="A description of the Product that you want to communicate to your customers. "
              "This description will be copied to every Sales Order, Delivery Order and Customer Invoice/Credit Note")
-
-    def _compute_brand_count(self):
-        return
 
     def _inverse_description_sale(self):
         for product in self:
