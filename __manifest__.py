@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Product Multi Brand",
+    'name': "Product Attribute Brand",
     
     'summary': "extension for invenory app",
   

@@ -1,17 +1,13 @@
 Note Partner relation
 ===============================
-Questo modulo aggiunge una relazione fra l'applicazione note ed i partner in modo che sia possibile relazionare una nota ad un partner
-LE note sono visibili sul form dei contatti del partner attraverso uno smart button
-Sul form della nota accanto al campo etichette appare il menù a tendina per scegliere il partner
-
+Questo modulo aggiunge un field is brand agli attributi dei prodotti così da
+rendere un brand un attributo generico e tutti i suoi valori come valori di quel brand
 
 Configuration
 =============
 
 Usage
 =====
-Descriprion usage
-
 
 Credits
 =======
