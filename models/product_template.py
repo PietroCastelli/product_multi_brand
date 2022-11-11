@@ -51,4 +51,3 @@ class ProductTemplate(models.Model):
                         brand_desc += " " + brand.description
                     if brand_desc:
                         product.description_sale += " | " + brand_desc
-        print(product.description_sale)
