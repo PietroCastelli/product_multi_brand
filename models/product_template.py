@@ -39,9 +39,8 @@ class ProductTemplate(models.Model):
     @api.depends('description_sale_header', 'attribute_line_brand_ids', 'brand_in_description_sale', 'description_sale')
     def _compute_description_sale(self):
         for product in self:
-            product.description_sale = ""
             if product.description_sale_header:
-                product.description_sale += product.description_sale_header
+                product.description_sale += " | " + product.description_sale_header
             if product.brand_in_description_sale and len(product.attribute_line_brand_ids) > 0:
                 for brand in product.attribute_line_brand_ids:
                     brand_desc = brand.attribute_id.name
